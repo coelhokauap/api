@@ -97,20 +97,29 @@ def buscar_comidas(termo):
 def salvar_e_mostrar_comida(comida):
     nome = comida.get("strMeal", "Prato sem nome")
     nome = nome.replace("Chicken", "Frango").replace("Sticky", "Agridoce")
-    dados = [{
+    novo_prato = {
         "id": comida.get("idMeal"),
         "nome": nome,
         "video_receita": comida.get("strYoutube") or "Vídeo não disponível",
-    }]
+    }
+
+    try:
+        with open("dados_api.json", "r", encoding="utf-8") as arquivo:
+            dados = json.load(arquivo)
+    except (FileNotFoundError, json.JSONDecodeError):
+        dados = []
+
+    if not isinstance(dados, list):
+        dados = []
+    dados.append(novo_prato)
 
     with open("dados_api.json", "w", encoding="utf-8") as arquivo:
         json.dump(dados, arquivo, ensure_ascii=False, indent=2)
 
     print("\nDados da comida escolhida:")
-    for item in dados:
-        print(f"- Nome: {item['nome']}")
-        print(f"- Vídeo da receita: {item['video_receita']}")
-    print("Lista salva em dados_api.json.")
+    print(f"- Nome: {novo_prato['nome']}")
+    print(f"- Vídeo da receita: {novo_prato['video_receita']}")
+    print(f"Consulta salva em dados_api.json. Total de pratos: {len(dados)}.")
 
 
 def recomendar_com_coca(comida):

@@ -19,7 +19,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-Digite uma busca, escolha um dos pratos encontrados e veja a recomendação. A busca funciona melhor com nomes em inglês, como `chicken` ou `cake`. Após escolher um prato, o app mostra uma lista simples com o nome e o link do vídeo, e salva essa seleção em `dados_api.json`.
+Digite uma busca, escolha um dos pratos encontrados e veja a recomendação. A busca funciona melhor com nomes em inglês, como `chicken` ou `cake`. Após escolher um prato, o app mostra uma lista simples com o nome e o link do vídeo, e acrescenta essa seleção à lista em `dados_api.json`.
 
 ## Como funciona a recomendação
 
@@ -33,4 +33,4 @@ O programa trata falhas de conexão, timeout, status HTTP inválido e JSON malfo
 
 - `main.py`: busca, seleção, recomendação e tratamento de erros.
 - `requirements.txt`: dependência HTTP do projeto.
-- `dados_api.json`: lista simples com o prato escolhido e o link do vídeo da receita; atualizada a cada seleção.
+- `dados_api.json`: lista persistente de pratos escolhidos e seus links de vídeo; cada seleção é acrescentada ao final.
